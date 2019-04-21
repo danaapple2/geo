@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+<title>Creating Mobile Optimized Pages</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="modernizr-custom.js" type="text/javascript"></script>    
+<script type="text/javascript">         
+	function testFeatures() {            
+    // Test for JavaScript Features
+    document.querySelector("#geoloc").innerHTML = Modernizr.geolocation ? "supported" : "not supported";         
+	}         
+
+	function getLocation() {
+        if (Modernizr.geolocation) {
+                navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+            }            
+            
+           function geoSuccess(positionInfo) {
+                document.getElementById("longitude").innerHTML = positionInfo.coords.longitude;
+                document.getElementById("latitude").innerHTML = positionInfo.coords.latitude;
+                document.getElementById("accuracy").innerHTML = positionInfo.coords.accuracy;
+                document.getElementById("altitude").innerHTML = positionInfo.coords.altitude;
+                document.getElementById("altitudeAccuracy").innerHTML = positionInfo.coords.altitudeAccuracy;
+                document.getElementById("heading").innerHTML = positionInfo.coords.heading;
+                document.getElementById("speed").innerHTML = positionInfo.coords.speed;
+            }
+
+            function geoError(positionError) {
+                if (errorInfo.code == 1)
+                    alert("The user denied permission access");
+                else if (errorInfo.code == 2)
+                    alert("Unable to locate you!");
+                else if (errorInfo.code == 3)
+                    alert("Timed out getting location");
+            }
+    }
+		
+	function initialize() {
+		// Test to see if we support the Storage API
+        var bSupportsLocal = (('localStorage' in window) && window['localStorage'] !== null);
+
+        // if localStorage is not supported, then bail on the demo
+        if (!bSupportsLocal) {
+        document.getElementById('infoform').innerHTML = "Sorry, this browser does not support the W3C Storage API.";
+        return;
+        }
+
+        // if the localStorage object has some content, restore it
+        if (window.localStorage.length != 0) {
+        document.getElementById('firstName').value = window.localStorage.getItem('firstName');
+        document.getElementById('lastName').value = window.localStorage.getItem('lastName');
+        document.getElementById('postCode').value = window.localStorage.getItem('postCode');
+        }
+	}
+ 
+	function start() {
+		testFeatures();
+		getLocation();
+		initialize();
+	}
+	
+	function storeLocalContent(fName, lName, pCode) {
+        window.localStorage.setItem('firstName', fName);
+        window.localStorage.setItem('lastName', lName);
+        window.localStorage.setItem('postCode', pCode);
+    }
+
+    function clearLocalContent(strToStore) {
+        window.localStorage.clear();
+    }
+	window.onload = start; 
+
+	</script>
+</head>
+<body>
+
+<h1>Creating Mobile Optimized Pages</h1>
+<h2>Script Features</h2>
+<p>Geolocation: <span id="geoloc"></span></p>
+
+<h2>Location Data:</h2>
+	<p>Longitude: <span id="longitude"></span></p>
+    <p>Latitude: <span id="latitude"></span></p>
+    <p>Accuracy: <span id="accuracy"></span></p>
+    <p>Altitude: <span id="altitude"></span></p>
+    <p>Altitude Accuracy: <span id="altitudeAccuracy"></span></p>
+    <p>Heading: <span id="heading"></span></p>
+    <p>Speed: <span id="speed"></span></p>
+<h2>Local Storage</h2>
+<p>Try entering information in the form, then closing and reopening the page.</p>
+<div>
+    <form action="" method="post" id="infoform">
+	<fieldset name="LocalStorage" id="ls">
+	<legend>Personal Information</legend>
+	<p><label id="fnLabel" for="firstName">First Name: </label>
+	<input id="firstName" name="firstName"></p>
+	<p><label id="lnLabel" for="lastName">Last Name: </label>
+	<input id="lastName" name="lastName"></p>
+	<p><label id="pclabel" for="postCode">Postal Code: </label>
+    <input id="postCode" name="postCode"></p>
+	<input type="button" value="Save" onclick="storeLocalContent(
+        document.querySelector('#firstName').value,
+        document.querySelector('#lastName').value,
+        document.querySelector('#postCode').value
+    )">
+	<input type="button" value="Clear" onclick="clearLocalContent()">
+	</fieldset>
+	</form>
+ </div>
+
+</body>
+</html>
