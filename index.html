@@ -1,7 +1,24 @@
+
+<header class="w3-container w3-2019-evening-blue w3-center" style="padding:128px 16px">
+	
+	
+	<video width="320" height="240" controls>
+	<source src="VideoAssignment.mp4" alt="The Bald Eagle video" type="video/mp4">
+	Your browser does not support the video tag.
+</video>
+	<h3>by Dana Apple</h3>
+</header>
+
+
+</body>
+</html>
+
 <!DOCTYPE html>
 <html class="no-js">
 <head>
 <title>Creating Mobile Optimized Pages</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-2019.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="modernizr-custom.js" type="text/javascript"></script>    
 <script type="text/javascript">         
@@ -65,20 +82,18 @@
         window.localStorage.setItem('postCode', pCode);
     }
 
-    function clearLocalContent(strToStore) {
-        window.localStorage.clear();
-    }
+    
 	window.onload = start; 
 
 	</script>
 </head>
 <body>
 
-<h1>Creating Mobile Optimized Pages</h1>
-<h2>Script Features</h2>
+<h1 class="w3-margin w3-jumbo">Creating Mobile Optimized Pages</h1>
+<h2 class="w3-xlarge">Script Features</h2>
 <p>Geolocation: <span id="geoloc"></span></p>
 
-<h2>Location Data:</h2>
+<h2 class="w3-xlarge">Location Data:</h2>
 	<p>Longitude: <span id="longitude"></span></p>
     <p>Latitude: <span id="latitude"></span></p>
     <p>Accuracy: <span id="accuracy"></span></p>
@@ -86,7 +101,7 @@
     <p>Altitude Accuracy: <span id="altitudeAccuracy"></span></p>
     <p>Heading: <span id="heading"></span></p>
     <p>Speed: <span id="speed"></span></p>
-<h2>Local Storage</h2>
+<h2 class="w3-xlarge">Local Storage</h2>
 <p>Try entering information in the form, then closing and reopening the page.</p>
 <div>
     <form action="" method="post" id="infoform">
@@ -109,4 +124,9 @@
  </div>
 
 </body>
+<script>
+function clearLocalContent(strToStore) {
+        window.localStorage.clear();
+}
+</script>
 </html>
